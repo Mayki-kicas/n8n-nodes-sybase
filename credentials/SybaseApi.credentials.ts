@@ -51,7 +51,7 @@ export class SybaseApi implements ICredentialType {
 			name: 'note',
 			type: 'notice',
 			default:
-				'Le timeout se règle directement dans le node Sybase (paramètre Timeout (ms)).',
+				'Timeout is configured directly in the Sybase node (parameter: Timeout In Ms).',
 		},
 	];
 }

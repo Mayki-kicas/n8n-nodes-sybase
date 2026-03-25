@@ -35,6 +35,21 @@ function logDebug(debug: boolean, message: string, metadata?: Record<string, unk
 	process.stderr.write(`[n8n-sybase] ${payload}\n`);
 }
 
+function normalizeTimeoutMs(input: number): number {
+	if (!Number.isFinite(input)) return 20000;
+	const rounded = Math.round(input);
+	if (rounded < 1000) return 1000;
+	if (rounded > 300000) return 300000;
+	return rounded;
+}
+
+function getQueryKind(query: string): string {
+	const trimmed = query.trim();
+	if (!trimmed) return 'empty';
+	const firstToken = trimmed.split(/\s+/)[0] ?? '';
+	return firstToken.toUpperCase();
+}
+
 function runQuery(
 	credentials: ISybaseCredentials,
 	query: string,
@@ -117,7 +132,8 @@ function runQuery(
 
 			logDebug(debug, 'Sybase connection established, running query', {
 				itemIndex,
-				queryPreview: query.slice(0, 180),
+				queryKind: getQueryKind(query),
+				queryLength: query.length,
 			});
 			client.query(query, (queryError, rows) => {
 				if (queryError) {
@@ -233,9 +249,11 @@ export class Sybase implements INodeType {
 				const query = this.getNodeParameter('query', itemIndex) as string;
 				const alwaysOutputData = this.getNodeParameter('alwaysOutputData', itemIndex, false) as boolean;
 				const debug = this.getNodeParameter('debug', itemIndex, false) as boolean;
-				const timeoutMs = this.getNodeParameter('timeoutMs', itemIndex, 20000) as number;
+				const timeoutInput = this.getNodeParameter('timeoutMs', itemIndex, 20000) as number;
+				const timeoutMs = normalizeTimeoutMs(timeoutInput);
 				logDebug(debug, 'Starting Sybase node execution for item', {
 					itemIndex,
+					timeoutInput,
 					timeoutMs,
 				});
 
