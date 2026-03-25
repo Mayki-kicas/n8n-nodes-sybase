@@ -107,3 +107,7 @@ Yes, for self-hosted n8n. Validate timeouts, network reliability, and query perf
 ## Keywords
 
 n8n sybase, n8n sybase node, n8n sybase connector, sybase automation, sybase sql workflow, sap sql anywhere n8n, sybase ase n8n, database workflow automation
+
+## Release Notes
+
+- 0.1.2: Scoped npm package rename to `@mayki-kicas/n8n-nodes-sybase`.
