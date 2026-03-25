@@ -1,6 +1,6 @@
 {
 	"name": "n8n-nodes-sybase",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "n8n community node for Sybase database queries",
 	"license": "MIT",
 	"homepage": "https://github.com/Mayki-kicas/n8n-nodes-sybase",
