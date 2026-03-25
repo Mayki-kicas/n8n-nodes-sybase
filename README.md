@@ -4,6 +4,8 @@ Sybase integration for n8n. This community node lets you connect n8n to a Sybase
 
 If you are searching for **n8n Sybase connector**, **n8n Sybase node**, **Sybase SQL in n8n**, or **SAP SQL Anywhere / Sybase ASE automation**, this package is built for that use case.
 
+npm package: `@mayki-kicas/n8n-nodes-sybase`
+
 ## What This Node Does
 
 - Connects n8n to a Sybase database with credentials
